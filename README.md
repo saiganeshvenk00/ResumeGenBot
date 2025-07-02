@@ -141,7 +141,8 @@ Don’t include '\n' at the end of bullets.
 Parse the optimized bullet output from OpenAI into a structured JSON object. The output from the AI agent is a flat string of key-value pairs (e.g., `dellbullet1: updated bullet`). This code step converts that into a format suitable for updating the Google Doc.
 
 **n8n Node:** Code (`Sort Bullets`)  
-- Type: JavaScript Code node  
+- Type: JavaScript Code node
+- Type: JavaScript Code node. Find code [here]((https://github.com/saiganeshvenk00/ResumeGenBot/blob/main/SortBulletsNode)) 
 - Function: Parses AI output line by line and converts it to JSON.
 
 **Code:<placeholder>**
