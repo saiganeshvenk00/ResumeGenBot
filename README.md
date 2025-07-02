@@ -94,46 +94,9 @@ Use OpenAI to optimize your resume bullets using keywords extracted from the job
 <placeholder>
 - To enable dynamic bullet injection, the resume template used in this workflow should contain placeholders (e.g., {dellbullet1}, {custexpbullet2}, {supertutor1}) instead of fixed bullet content. These placeholders should replace each resume bullet in the original document, while maintaining section structure, job titles, and formatting. Leave some placeholders intentionally blank (e.g., {dellbullet5}) to allow the AI to generate new, role-aligned bullets. The placeholder names must exactly match the keys returned by the AI agent to ensure accurate mapping when the document is updated later in the workflow.
 
-**User Message Prompt:**
-I am a job seeker who is applying for jobs in the market right now. My top roles are, Product Management, Product Marketing Management, AI Solutions Architect, Solutions Architecture and Solutions Engineering. You are an expert resume writer who is tasked at making my resume align with the job description without taking away the essence of my experience.
 
-Your task is to take the input of key terms from a scraped job description ({{ $('Firecrawl Scraping').item.json.data }}) and my resume bullets that I will share below. You will need to include the skills (that are part of the job description) listed out in {{ $('First Keys').item.json['Top 10 technical skills needed'] }}. You will also need to include the tools listed in {{ $('First Keys').item.json['Top 10 technical tools needed'] }}. You will use the OpenAI model attached to optimize and give me an output consisting of optimized bullet points that are in line with the keywords pulled from the JD. Here are the conditions for each bullet:
+**User Message Prompt:Find prompt [here](https://github.com/saiganeshvenk00/ResumeGenBot/blob/main/ResumeBuilderPrompt) **
 
-Each bullet must be less than 125 characters (including spaces and punctuations) in length. Ensure any bullet generated has the same length as the others
-
-Start with an extremely strong action verb
-
-Must be quantized and must help the reader understand what I accomplished and the value I brought to the role
-
-Follow the STAR format while phrasing the bullet. Must be situation, task, accomplishment, and result
-
-The objective is to ensure the ATS system picks the resume because it has all the keywords. Basically, it must all fit in the same line and must not go to a second line. Every bullet must be the same length. Don’t alter the bullets too much, just a few words here and there to ensure my original resume is still intact. But ensure the resume aligns perfectly with the keywords provided. The resume bullets must be only as long as the bullets I am sharing with you. I am sharing them in the following format: bullet name : bullet content.
-
-You can find the resume bullets in the "Reference Resume Doc" tool attached. The document includes 9 sections representing prior experiences, each with a set of bullet points that describe accomplishments. A few placeholder bullets ({exp1bullet5} and {exp3bullet3}) are intentionally left blank to give you room to generate additional content aligned to the role.
-
-The sections and bullet placeholders are structured as follows:
-
-Technical Solutions Consultant ({exp1bullet1} through {exp1bullet5})
-Solutions Engineering Intern ({exp2bullet1}, {exp2bullet2})
-Support Specialist | Infrastructure ({exp3bullet1} through {exp3bullet3})
-Automation Platform Startup ({exp4bullet1} through {exp4bullet3})
-EdTech Volunteer Product Manager ({exp5bullet1}, {exp5bullet2})
-AI Tool Builder | Workflow Automation ({exp6bullet1}, {exp6bullet2})
-Client Onboarding Platform ({exp7bullet1}, {exp7bullet2})
-Resume Assistant Project ({exp8bullet1}, {exp8bullet2})
-Robotics Strategy Capstone ({exp9bullet1}, {exp9bullet2})
-
-Give me all the optimized bullets in the following format. No intro, no line breaks, just:
-bullet_name : new bullet
-
-Also, suggest 5 tools I will need for the Role:{{ $('Firecrawl Scraping').item.json.data[0].title }} based on {{ $('First Keys').item.json['Top 10 technical tools needed'] }}. Output format:
-tool1 : Name
-tool2 : Name
-tool3 : Name
-tool4 : Name
-tool5 : Name
-
-Don’t include '\n' at the end of bullets.
 
 ---
 
