@@ -4,7 +4,16 @@
 ![ResumeGenBot](https://github.com/user-attachments/assets/f5e7aaa3-14fb-4f80-bd46-24dabd9dc58d)
 
 **An AI-powered Telegram bot that tailors your resume to any job post in minutes. Just send a job description link and the bot scrapes it, extracts keywords, rewrites your resume bullets using GPT, and delivers a customized, ATS-friendly PDF directly to your chat.**
+---
 
+You can either:
+
+- **Import the full workflow JSON** [file](https://github.com/saiganeshvenk00/ResumeGenBot/blob/main/Quick_build.json) into your own n8n instance to get started instantly,  
+**OR**  
+- **Follow the detailed step-by-step instructions below** to build out the complete ResumeGenBot workflow from scratch using n8n nodes.
+
+
+---
 **Step 1:**  
 
 Trigger the workflow when a user sends a message on Telegram. The message (typically a job link) is forwarded through the flow.
