@@ -59,7 +59,7 @@ Convert the raw output from the keyword extraction agent into a structured JSON 
 - Type: JavaScript Code node  
 - Function: Parses a plain-text string of `key: value` pairs into a valid JSON object.
 
-**Code: <Placeholder>**
+**Code: [<Placeholder>](http://github.com/saiganeshvenk00/ResumeGenBot/blob/main/FirstKeysNode)**
 
 ---
 
