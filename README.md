@@ -95,7 +95,7 @@ Use OpenAI to optimize your resume bullets using keywords extracted from the job
 - To enable dynamic bullet injection, the resume template used in this workflow should contain placeholders (e.g., {dellbullet1}, {custexpbullet2}, {supertutor1}) instead of fixed bullet content. These placeholders should replace each resume bullet in the original document, while maintaining section structure, job titles, and formatting. Leave some placeholders intentionally blank (e.g., {dellbullet5}) to allow the AI to generate new, role-aligned bullets. The placeholder names must exactly match the keys returned by the AI agent to ensure accurate mapping when the document is updated later in the workflow.
 
 
-**User Message Prompt:Find prompt [here](https://github.com/saiganeshvenk00/ResumeGenBot/blob/main/ResumeBuilderPrompt) **
+- User Message Prompt: Find prompt [here](https://github.com/saiganeshvenk00/ResumeGenBot/blob/main/ResumeBuilderPrompt)
 
 
 ---
