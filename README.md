@@ -178,6 +178,8 @@ Upload the finalized PDF resume back into Google Drive for record-keeping or fut
 - File: The PDF downloaded in Step 10  
 - Destination: The same job-specific folder created in Step 5
 
+---
+
 **Step 12:**  
 Send the final, tailored PDF resume back to the user via Telegram. This allows for instant access and reuse without needing to leave the chat.
 
