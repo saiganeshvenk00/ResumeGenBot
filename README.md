@@ -24,7 +24,13 @@ Scrape the job description content from the URL received via Telegram. The scrap
 - Authentication: Header Auth (Firecrawl API key)
 
 **Request Body:**
-- <place holder>
+{
+  "query": "{{ $json.message.text }}",
+  "limit": 5,
+  "scrapeOptions": {
+    "formats":["markdown"]
+  }
+} 
 
 ---
 
