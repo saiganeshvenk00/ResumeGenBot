@@ -1,9 +1,9 @@
 # ResumeGenBot
-**An AI-powered Telegram bot that tailors your resume to any job post in minutes. Just send a job description link and the bot scrapes it, extracts keywords, rewrites your resume bullets using GPT, and delivers a customized, ATS-friendly PDF directly to your chat.**
 ---
 
 ![ResumeGenBot](https://github.com/user-attachments/assets/f5e7aaa3-14fb-4f80-bd46-24dabd9dc58d)
 
+**An AI-powered Telegram bot that tailors your resume to any job post in minutes. Just send a job description link and the bot scrapes it, extracts keywords, rewrites your resume bullets using GPT, and delivers a customized, ATS-friendly PDF directly to your chat.**
 
 **Step 1:**  
 
