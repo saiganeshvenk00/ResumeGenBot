@@ -1,14 +1,18 @@
 # ResumeGenBot
 An AI-powered Telegram bot that tailors your resume to any job post in minutes. Just send a job description link and the bot scrapes it, extracts keywords, rewrites your resume bullets using GPT, and delivers a customized, ATS-friendly PDF directly to your chat.
+---
 
 **Step 1:**  
+
 Trigger the workflow when a user sends a message on Telegram. The message (typically a job link) is forwarded through the flow.
 
 **n8n Node:** Telegram Trigger  
 - Watches for new incoming messages from a connected Telegram bot.
 
+---
 
 **Step 2:**  
+
 Scrape the job description content from the URL received via Telegram. The scraped content is returned in markdown format and will be used in downstream AI steps.
 
 **n8n Node:** HTTP Request (`Firecrawl Scraping`)  
@@ -19,7 +23,10 @@ Scrape the job description content from the URL received via Telegram. The scrap
 **Request Body:**
 - <place holder>
 
+---
+
 **Step 3:**  
+
 Use OpenAI to extract structured keywords and metadata from the scraped job description. This includes key ATS-relevant elements such as role title, company name, team, skills, and tools.
 
 **n8n Node:** OpenAI Tools Agent (`Keyword Generator`)  
@@ -39,7 +46,10 @@ Team name (if available, else write "Not specified")
 Top 10 technical skills needed (according to JD and your suggestions)
 Top 10 technical tools needed (be specific on the kind of tools an expert in this role would use. Be specific and name the tool, not what kind of tool it is)
 
+---
+
 **Step 4:**  
+
 Convert the raw output from the keyword extraction agent into a structured JSON object. This parsed output can be referenced cleanly in future steps for folder naming, resume customization, and more.
 
 **n8n Node:** Code (`First Keys`)  
@@ -48,7 +58,10 @@ Convert the raw output from the keyword extraction agent into a structured JSON 
 
 **Code: <Placeholder>**
 
+---
+
 **Step 5:**  
+
 Create a new folder in Google Drive named after the job title or company name. This keeps each tailored resume and its related files organized by application.
 
 **n8n Node:** Google Drive (`Job Folder`)  
@@ -56,7 +69,10 @@ Create a new folder in Google Drive named after the job title or company name. T
 - Folder Name: Dynamically pulled from a parsed field like `{{ $json["Role name"] }}` or `{{ $json["Company name"] }}`  
 - Parent Folder: Your predefined root directory for job folders in Google Drive
 
+---
+
 **Step 6:**  
+
 Duplicate your resume template into the job-specific folder created in the previous step. The template contains placeholders (like `{exp1bullet1}`) that will be updated in later steps.
 
 **n8n Node:** Google Drive (`Duplicate Resume Template`)  
@@ -64,8 +80,10 @@ Duplicate your resume template into the job-specific folder created in the previ
 - Source File: Your original Google Docs resume template with placeholder tags  
 - Destination Folder: The newly created folder from Step 5
 
+---
 
 **Step 7:**  
+
 Use OpenAI to optimize your resume bullets using keywords extracted from the job description. The agent also references your original resume to maintain tone and structure. It rewrites existing bullets, adds new ones where placeholders are left blank, and recommends five role-specific tools.
 
 **n8n Node: OpenAI Tools Agent (`Resume Builder`)** 
@@ -114,6 +132,8 @@ tool5 : Name
 
 Don’t include '\n' at the end of bullets.
 
+---
+
 **Step 8:**  
 Parse the optimized bullet output from OpenAI into a structured JSON object. The output from the AI agent is a flat string of key-value pairs (e.g., `dellbullet1: updated bullet`). This code step converts that into a format suitable for updating the Google Doc.
 
@@ -136,7 +156,10 @@ Update the duplicated resume template with the optimized bullet points. This nod
 
 > To enable dynamic bullet injection, the resume template used in this workflow should contain placeholders (e.g., `{dellbullet1}`, `{custexpbullet2}`, `{supertutor1}`) instead of fixed bullet content. These placeholders should replace each resume bullet in the original document, while maintaining section structure, job titles, and formatting. Leave some placeholders intentionally blank (e.g., `{dellbullet5}`) to allow the AI to generate new, role-aligned bullets. The placeholder names must exactly match the keys returned by the AI agent to ensure accurate mapping when the document is updated later in the workflow.
 
+---
+
 **Step 10:**  
+
 Convert the updated Google Doc resume into a downloadable PDF file. This creates a polished, ready-to-send resume version aligned with the job description.
 
 **n8n Node:** Google Drive (`Download as PDF`)  
@@ -144,7 +167,10 @@ Convert the updated Google Doc resume into a downloadable PDF file. This creates
 - File: The updated Google Doc from Step 9  
 - Format: PDF
 
+---
 **Step 11:**  
+
+
 Upload the finalized PDF resume back into Google Drive for record-keeping or future reference. This step ensures each job-specific resume is stored in its respective job folder.
 
 **n8n Node:** Google Drive (`Upload as PDF`)  
