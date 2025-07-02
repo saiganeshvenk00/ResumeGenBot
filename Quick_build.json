@@ -1,0 +1,741 @@
+{
+  "name": "Quick build",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -280,
+        -1020
+      ],
+      "id": "9e2b1c02-312e-494f-8d4a-615beda04b8b",
+      "name": "Telegram Trigger",
+      "webhookId": "733d9434-4e20-4d0f-aaf4-2e96eb911dc1",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZwAeo98OurRbtVgn",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.firecrawl.dev/v1/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $json.message.text }}\",\n  \"limit\": 5,\n  \"scrapeOptions\": {\n    \"formats\":[\"markdown\"]\n  }\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        40,
+        -1020
+      ],
+      "id": "0d61bb6c-39b6-4dd9-90ce-fb265347ff2e",
+      "name": "Firecrawl Scraping",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4SLpMeZhtsgBMWIZ",
+          "name": "Firecrawl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -320,
+        -500
+      ],
+      "id": "e3d31a20-d8d8-45dd-bad9-a1b79b35f5fd",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "oi1nrM5F9gqYgDP5",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1j6wjdDoBR9SZ5c_w6HilUrjGLb-nPf0WXBp5afYCD6I/edit?tab=t.0",
+        "simple": "={{ $fromAI('Simplify', ``, 'boolean') }}"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        -500
+      ],
+      "id": "5bbb8ef3-e373-44d1-bf81-c708a96d3fd3",
+      "name": "Reference Doc Resume ",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "9lk6M58Y5325LXqR",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $('Duplicate Resume Template').item.json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "={dellbullet1}",
+              "replaceText": "={{ $json.dellbullet1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{dellbullet2}",
+              "replaceText": "={{ $json.dellbullet2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{dellbullet3}",
+              "replaceText": "={{ $json.dellbullet3 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{dellbullet4}",
+              "replaceText": "={{ $json.dellbullet4 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{dellinternbullet1}",
+              "replaceText": "={{ $json.dellinternbullet1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{dellinternbullet2}",
+              "replaceText": "={{ $json.dellinternbullet2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{custexpbullet1}",
+              "replaceText": "={{ $json.custexpbullet1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{custexpbullet2}",
+              "replaceText": "={{ $json.custexpbullet2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{custexpbullet3}",
+              "replaceText": "={{ $json.custexpbullet3 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{custexpbullet4}",
+              "replaceText": "={{ $json.custexpbullet4 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{custexpbullet5}",
+              "replaceText": "={{ $json.custexpbullet5 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{custexpbullet6}",
+              "replaceText": "={{ $json.custexpbullet6 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{simplbullet1}",
+              "replaceText": "={{ $json.simplbullet1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{simplbullet2}",
+              "replaceText": "={{ $json.simplbullet2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{supertutor1}",
+              "replaceText": "={{ $json.supertutor1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{supertutor2}",
+              "replaceText": "={{ $json.supertutor2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{pigeon1}",
+              "replaceText": "={{ $json.pigeon1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{pigeon2}",
+              "replaceText": "={{ $json.pigeon2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{jobber1}",
+              "replaceText": "={{ $json.jobber1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{jobber2}",
+              "replaceText": "={{ $json.jobber2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{rg1}",
+              "replaceText": "={{ $json.rg1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{rg2}",
+              "replaceText": "={{ $json.rg2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{tool1}",
+              "replaceText": "={{ $json.tool1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{tool2}",
+              "replaceText": "={{ $json.tool2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{tool3}",
+              "replaceText": "={{ $json.tool2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "={tool4}",
+              "replaceText": "={{ $json.tool4 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{Tesla1}",
+              "replaceText": "={{ $json.Tesla1 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{Tesla2}",
+              "replaceText": "={{ $json.Tesla2 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{dellbullet5}",
+              "replaceText": "={{ $json.dellbullet5 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{simplbullet3}",
+              "replaceText": "={{ $json.simplbullet3 }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        440,
+        -680
+      ],
+      "id": "618cee2d-f298-48e4-ae57-697d13c16d65",
+      "name": "New Resume",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "9lk6M58Y5325LXqR",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1qv1fvCekB0KSnfv_NSarjzwvRN2QM2UDyyOLYFsEuJE",
+          "mode": "id"
+        },
+        "name": "=Sai Venkataraman Resume_{{ $('First Keys').item.json['Company name'] }}_{{ $('First Keys').item.json['Role name'] }}",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1440,
+        -1020
+      ],
+      "id": "d594bce9-f2ee-4b0e-983b-21ff2cdecd2b",
+      "name": "Duplicate Resume Template",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "WhhJlyHaFc8Kwqav",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Resume: \n\n{{ $json.webViewLink }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1460,
+        -680
+      ],
+      "id": "4cf01458-3eaa-4d4d-a3ed-ed3b90c49601",
+      "name": "Telegram",
+      "webhookId": "62201bd5-e3c8-4e2f-8601-be9886c06a55",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZwAeo98OurRbtVgn",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $json['Company name'] }}_{{ $json['Role name'] }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/u/0/folders/1XSlewOSg-R31C9oe6god54JUbN9sqOmq",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        -1020
+      ],
+      "id": "22556939-8690-4fd1-a6a5-b6da6cada03c",
+      "name": "Job Folder",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "WhhJlyHaFc8Kwqav",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        800,
+        -680
+      ],
+      "id": "454f7c31-94d6-47de-9ff0-0d8de569cd4f",
+      "name": "Download as PDF",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "WhhJlyHaFc8Kwqav",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "=Sai Venkataraman Resume_{{ $json['Company name'] }}_{{ $json['Role name'] }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Job Folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1140,
+        -680
+      ],
+      "id": "28881ab3-4f8b-4974-9b59-cd0be3e09989",
+      "name": "Upload as PDF",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "WhhJlyHaFc8Kwqav",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        260,
+        -860
+      ],
+      "id": "ba359815-cc2d-416b-8dfa-d92ca484ab5f",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "oi1nrM5F9gqYgDP5",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Step 1: Extract raw string\nconst rawString = $input.first().json.output;\n\n// Step 2: Split into lines\nconst lines = rawString.split('\\n');\n\n// Step 3: Build a proper JSON object\nconst parsedJson = {};\nfor (const line of lines) {\n  if (line.trim()) {\n    const [rawKey, ...rawValueParts] = line.split(':');\n    \n    if (!rawKey || rawValueParts.length === 0) {\n      throw new Error('Invalid format. Ensure each line follows the \"key: value\" structure.');\n    }\n\n    const rawValue = rawValueParts.join(':'); // In case value contains colons\n    const key = rawKey.trim().replace(/^\"|\"$/g, '');\n    const value = rawValue.trim().replace(/^\"|\"$/g, '').replace(/\\s+$/, '');\n\n    if (value.includes('\\\\n')) {\n      throw new Error(`Line for key \"${key}\" contains a \"\\\\n\". Please remove newline characters from the input value.`);\n    }\n\n    parsedJson[key] = value;\n  }\n}\n\n// Step 4: Return as a single JSON object\nreturn [\n  {\n    json: parsedJson\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        -1020
+      ],
+      "id": "164c863b-97af-475f-8e7a-5ff9a3e67c61",
+      "name": "First Keys"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Step 1: Extract raw string\nconst rawString = $json.output;\n\n// Step 2: Split into lines\nconst lines = rawString.split('\\n');\n\n// Step 3: Build a proper JSON object\nconst parsedJson = {};\nfor (const line of lines) {\n  if (line.trim()) {\n    const [rawKey, ...rawValueParts] = line.split(':');\n    \n    if (!rawKey || rawValueParts.length === 0) {\n      throw new Error('Invalid format. Ensure each line follows the \"key: value\" structure.');\n    }\n\n    const rawValue = rawValueParts.join(':'); // In case value contains colons\n    const key = rawKey.trim().replace(/^\"|\"$/g, '');\n    const value = rawValue.trim().replace(/^\"|\"$/g, '').replace(/\\s+$/, '');\n\n    if (value.includes('\\\\n')) {\n      throw new Error(`Line for key \"${key}\" contains a \"\\\\n\". Please remove newline characters from the input value.`);\n    }\n\n    parsedJson[key] = value;\n  }\n}\n\n// Step 4: Return as a single JSON object\nreturn [\n  {\n    json: parsedJson\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        140,
+        -680
+      ],
+      "id": "afadd287-bad9-4fde-80d0-22628bc1e8d9",
+      "name": "Sort bullets"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a helpful assistant. Based on the information in {{ $json.data[0].markdown }}, return a flat list of key-value pairs. The pairs must be key terms that an ATS resume system will immediately pick up on based on the scraped job description in {{ $json.data[0].markdown }}\n\nEach item must be one line only in the format: Key: Value.\nDo not include any line breaks (\\n) or lists in the values. If there are multiple values, separate them by commas in the same line.\n\nRequired Keys:\n\nCompany name\n\nRole name (if not available, predict what it can be)\n\nTeam name (if available, else write \"Not specified\")\n\nTop 10 technical skills needed (according to JD and your suggestions)\n\nTop 10 technical tools needed  (be specifc on the kind of tools an expert in this role would use. Be specific and name the tool, not what kind of tool it is)\n\n\n",
+        "options": {
+          "systemMessage": "=You are a helpful assistant helping me pull key words from a job description"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        260,
+        -1020
+      ],
+      "id": "8189f761-f288-4d2c-b42b-6debea88b051",
+      "name": "Key word generator"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=I am a job seeker who is applying for jobs in the market right now. My top roles are, Product Managment, Product Marketing Management, AI Solutions Architect, Solutions Architecture and Solutions engineering. You are an expert resume writer who is tasked at making my resume align with the job description without taking away the essence of my expereince.\n\nYour task is to take the input of key terms from a scraped job description ({{ $('Firecrawl Scraping').item.json.data }} ) and my resume bullets that i will share below. You will need to include the skills (that are part of the job description) listed out in {{ $('First Keys').item.json['Top 10 technical skills needed'] }}. You will also need to include the tools listed in {{ $('First Keys').item.json['Top 10 technical tools needed'] }}. You will use the OpenAi model attached to optimize and give me an ouput consisting of optimized bullet points that are in line with the keywords pulled from the JD. Here are the conditions for eatch bullet:\n1) Each bullet must be less than 125 characters (including spaces and punctuations)in length. Ensure any bullet generated has the same length as the others\n2) Start with an extremely strong action verb\n3) Must be quantized and must help the reader understand what I accomplished and the value I brught to the role.\n4) Follow the STAR format while phrasing the bullet. must be situation, task, accomplishment and Result.\n\nThe objective is to ensure the ATS system picks the resume because it has all the keyw rods. Basically, it must all fit in the same line and must not go to a second line. Every bullet must be the same length.Dont alter the bullets too much, just a few words here and there to ensure my original resume is still intact. But ensure the resume aligns perfetly with the key words provided.The resume bullets must be only as long as the bullets I am sharing with you. I am sharing them in the folliwng format: bullet name : bullet content.\n\nYou can find the resume bullets in the \"Reference Resume Doc\" tool attached. In the doc you will find 9 sections and a resume points for each. I want you to optimize those bullets as instructed above. I have also left a few empty bullets ({dellbullet5} and {simplbullet3} ) for you to come up with your own to help align better to the role. Ensure those two new bullets align with the job role section it falls under. The sections are as follows. \nPresales Solutions Architect ({dellbullet1},{dellbullet2},{dellbullet3},{dellbullet4},{dellbullet5})  \nPresales Solutions Architect Intern ({dellinternbullet1},{dellinternbullet2})   \nCustomer Experience Engineer | Data Protection ({custexpbullet1},{custexpbullet2},{custexpbullet3},{custexpbullet4},{custexpbullet5},{custexpbullet6})    \nSimpl Technologies ({simplbullet1},{simplbullet2},{simplbullet3})\nSuperTutor | Student Product Manager ({supertutor1},{supertutor2})\t\nPigeon AI | Co-Builder, GTM & Full-Stack ({pigeon1},{pigeon2})\nJobber ({jobber1},{jobber2})\nResume Generator ({rg1},{rg2})\nTesla Optimus GTM Strategy ({Tesla1},{Tesla2})\n\nGive me all the optimized bullets in the following format. No intro, you needdnt mention the role and so on. you dont need to include line breaks. I will map it manually later: \ndellbullet1 : new bulet\nand so on.\n\n\nAlso come up with the 5 most important tools(from {{ $('First Keys').item.json['Top 10 technical tools needed'] }} ) I will need for the  Role:{{ $('Firecrawl Scraping').item.json.data[0].title }} which I will map manually later, ({tool1},{tool2},{tool3},{tool4},{tool5}). Always name a specific tool or service that will prove useful for the role. It can also be a technology. If the input data has any tools mentioned, include that directly. Go through the  \"Reference Resume Doc\" tool attached to avoid redundancy. Share it with the output in the following format:\ntool1 : Name\n\nDoint include '\\n' at the end of bullets. \n",
+        "options": {
+          "systemMessage": "=You are an expert resume writer. You help optimize my resume based on the scraped job description you are provided from {{ $('Firecrawl Scraping').item.json.data }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -300,
+        -680
+      ],
+      "id": "e149ff76-f53f-4760-8452-83dc64c841aa",
+      "name": "Resume builder"
+    },
+    {
+      "parameters": {
+        "content": "## Input JD & scrape link | Generate Keywords",
+        "height": 280,
+        "width": 980
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -1080
+      ],
+      "id": "a6d40ed9-8ac1-4c7c-a9e0-6a7aa54f9fd4",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Generate Job folder",
+        "height": 280,
+        "width": 980,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        700,
+        -1080
+      ],
+      "id": "abb623d5-57f2-4fc6-a394-70b652fbc163",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Optimize Resume | Inject Keywords",
+        "height": 280,
+        "width": 980,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -760
+      ],
+      "id": "83b62594-629c-45a9-97ae-a0ef7aebcbf7",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Convert google doc to PDF",
+        "height": 280,
+        "width": 980,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        700,
+        -760
+      ],
+      "id": "6f42695b-b3c6-4ea8-877d-190e2a85426b",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Firecrawl Scraping",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Firecrawl Scraping": {
+      "main": [
+        [
+          {
+            "node": "Key word generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Resume builder",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reference Doc Resume ": {
+      "ai_tool": [
+        [
+          {
+            "node": "Resume builder",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New Resume": {
+      "main": [
+        [
+          {
+            "node": "Download as PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Duplicate Resume Template": {
+      "main": [
+        [
+          {
+            "node": "Resume builder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Job Folder": {
+      "main": [
+        [
+          {
+            "node": "Duplicate Resume Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download as PDF": {
+      "main": [
+        [
+          {
+            "node": "Upload as PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload as PDF": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Key word generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "First Keys": {
+      "main": [
+        [
+          {
+            "node": "Job Folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort bullets": {
+      "main": [
+        [
+          {
+            "node": "New Resume",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Key word generator": {
+      "main": [
+        [
+          {
+            "node": "First Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resume builder": {
+      "main": [
+        [
+          {
+            "node": "Sort bullets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2b726985-0f26-40aa-bcef-62dc60f6e31a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b1c9061e7e5a9871373211392725e0fcc7c0ef3f0ba8572de6b7837272613d28"
+  },
+  "id": "A16Q7dE2Io1Zg0lJ",
+  "tags": []
+}
