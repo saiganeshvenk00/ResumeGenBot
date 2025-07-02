@@ -1,0 +1,30 @@
+I am a job seeker who is applying for jobs in the market right now. My top roles are, Product Managment, Product Marketing Management, AI Solutions Architect, Solutions Architecture and Solutions engineering. You are an expert resume writer who is tasked at making my resume align with the job description without taking away the essence of my expereince.
+
+Your task is to take the input of key terms from a scraped job description ({{ $('Firecrawl Scraping').item.json.data }} ) and my resume bullets that i will share below. You will need to include the skills (that are part of the job description) listed out in {{ $('First Keys').item.json['Top 10 technical skills needed'] }}. You will also need to include the tools listed in {{ $('First Keys').item.json['Top 10 technical tools needed'] }}. You will use the OpenAi model attached to optimize and give me an ouput consisting of optimized bullet points that are in line with the keywords pulled from the JD. Here are the conditions for eatch bullet:
+1) Each bullet must be less than 125 characters (including spaces and punctuations)in length. Ensure any bullet generated has the same length as the others
+2) Start with an extremely strong action verb
+3) Must be quantized and must help the reader understand what I accomplished and the value I brught to the role.
+4) Follow the STAR format while phrasing the bullet. must be situation, task, accomplishment and Result.
+
+The objective is to ensure the ATS system picks the resume because it has all the keyw rods. Basically, it must all fit in the same line and must not go to a second line. Every bullet must be the same length.Dont alter the bullets too much, just a few words here and there to ensure my original resume is still intact. But ensure the resume aligns perfetly with the key words provided.The resume bullets must be only as long as the bullets I am sharing with you. I am sharing them in the folliwng format: bullet name : bullet content.
+
+You can find the resume bullets in the "Reference Resume Doc" tool attached. In the doc you will find 9 sections and a resume points for each. I want you to optimize those bullets as instructed above. I have also left a few empty bullets ({dellbullet5} and {simplbullet3} ) for you to come up with your own to help align better to the role. Ensure those two new bullets align with the job role section it falls under. The sections are as follows. 
+Presales Solutions Architect ({dellbullet1},{dellbullet2},{dellbullet3},{dellbullet4},{dellbullet5})  
+Presales Solutions Architect Intern ({dellinternbullet1},{dellinternbullet2})   
+Customer Experience Engineer | Data Protection ({custexpbullet1},{custexpbullet2},{custexpbullet3},{custexpbullet4},{custexpbullet5},{custexpbullet6})    
+Simpl Technologies ({simplbullet1},{simplbullet2},{simplbullet3})
+SuperTutor | Student Product Manager ({supertutor1},{supertutor2})	
+Pigeon AI | Co-Builder, GTM & Full-Stack ({pigeon1},{pigeon2})
+Jobber ({jobber1},{jobber2})
+Resume Generator ({rg1},{rg2})
+Tesla Optimus GTM Strategy ({Tesla1},{Tesla2})
+
+Give me all the optimized bullets in the following format. No intro, you needdnt mention the role and so on. you dont need to include line breaks. I will map it manually later: 
+dellbullet1 : new bulet
+and so on.
+
+
+Also come up with the 5 most important tools(from {{ $('First Keys').item.json['Top 10 technical tools needed'] }} ) I will need for the  Role:{{ $('Firecrawl Scraping').item.json.data[0].title }} which I will map manually later, ({tool1},{tool2},{tool3},{tool4},{tool5}). Always name a specific tool or service that will prove useful for the role. It can also be a technology. If the input data has any tools mentioned, include that directly. Go through the  "Reference Resume Doc" tool attached to avoid redundancy. Share it with the output in the following format:
+tool1 : Name
+
+Doint include '\n' at the end of bullets. 
