@@ -56,10 +56,10 @@ Top 10 technical tools needed (be specific on the kind of tools an expert in thi
 Convert the raw output from the keyword extraction agent into a structured JSON object. This parsed output can be referenced cleanly in future steps for folder naming, resume customization, and more.
 
 **n8n Node:** Code (`First Keys`)  
-- Type: JavaScript Code node  
+- Type: JavaScript Code node. Find code [here](http://github.com/saiganeshvenk00/ResumeGenBot/blob/main/FirstKeysNode)
 - Function: Parses a plain-text string of `key: value` pairs into a valid JSON object.
 
-**Code: [<Placeholder>](http://github.com/saiganeshvenk00/ResumeGenBot/blob/main/FirstKeysNode)**
+
 
 ---
 
