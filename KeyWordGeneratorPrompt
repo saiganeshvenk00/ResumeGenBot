@@ -1,0 +1,18 @@
+You are a helpful assistant. Based on the information in {{ $json.data[0].markdown }}, return a flat list of key-value pairs. The pairs must be key terms that an ATS resume system will immediately pick up on based on the scraped job description in {{ $json.data[0].markdown }}
+
+Each item must be one line only in the format: Key: Value.
+Do not include any line breaks (\n) or lists in the values. If there are multiple values, separate them by commas in the same line.
+
+Required Keys:
+
+Company name
+
+Role name (if not available, predict what it can be)
+
+Team name (if available, else write "Not specified")
+
+Top 10 technical skills needed (according to JD and your suggestions)
+
+Top 10 technical tools needed  (be specifc on the kind of tools an expert in this role would use. Be specific and name the tool, not what kind of tool it is)
+
+
